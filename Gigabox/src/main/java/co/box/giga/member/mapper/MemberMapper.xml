@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.box.giga.member.mapper.MemberMapper">
+
+	<insert id="join" parameterType="co.box.giga.member.service.MemberVO">
+	INSERT INTO MEMBER VALUES 
+	(#{id},#{pwd},#{nm},#{birth},#{phone},#{picAttech},#{pic},#{email},"멤버","1","1000")
+	</insert>
+	
+	<select id="idCheck" resultType="integer">
+	SELECT COUNT(*) FROM MEMBER
+	WHERE ID = #{id}
+	</select>
+	
+	<select id="findId" parameterType="co.box.giga.member.service.MemberVO" resultType="string">
+	 SELECT ID, 
+     	RPAD(SUBSTR(MEMBER_ID,1,2),LENGTH(MEMBER_ID),'*') AS MEMBER_ID_STAR
+        FROM MEMBER WHERE NM =#{nm} AND EMAIL=#{email}
+	</select>
+	
+	<update id="pwdUpdate">
+	UPDATE MEMBER
+	SET PWD = #{pwd}
+	WHERE ID = #{id}
+	</update>
+	
+	
+</mapper>
