@@ -14,11 +14,11 @@ public class GigaboxApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GigaboxApplication.class, args);
 	}
+
 	// 메인화면
-		@GetMapping("/")
-		public String main() {
-			return "main/main";
-		}
-	
-	
+	@GetMapping("/")
+	public String main() {
+		return "main/main";
+	}
+
 }
