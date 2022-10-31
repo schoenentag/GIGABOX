@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.box.giga.cmmncd.mapper.CmmnCdMapper">
+	
+	<select id="cdList" resultType="co.box.giga.cmmncd.service.CmmncdVO">
+		SELECT * 
+		FROM CMMNCD 
+		WHERE CD_INI=#{value}
+	</select>	
+
+</mapper>
