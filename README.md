@@ -13,11 +13,12 @@ MEGA BOX를 벤치마킹하여 만든 영화 예매 사이트
 
 ## 사용 기술 및 라이브러리
 * JAVA 11, JavaScript, HTML5, CSS3
-* IDE : eclipse
+* IDE : eclipse, visual studio code
 * Framework : Springboot, Bootstrap4
 * Database : ERD cloud,  Oracle cloud, Oracle DB
 * ORM : Mybatis
 * library : JQuery, Thymeleaf, lombok
 * API : I'mport, 영화진흥위원회 API
+* SCM : Git, GitHub
 
 ## 구현
