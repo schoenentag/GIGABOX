@@ -4,7 +4,7 @@
 
 	<insert id="join" parameterType="co.box.giga.member.service.MemberVO">
 	INSERT INTO MEMBER VALUES 
-	(#{id},#{pwd},#{nm},#{birth},#{phone},#{picAttech},#{pic},#{email},"멤버","1","1000")
+	(#{id},#{pwd},#{nm},#{birth},#{phone},"test","test",#{email},"멤버","1","1000")
 	</insert>
 	
 	<select id="idCheck" resultType="integer">
@@ -23,6 +23,11 @@
 	SET PWD = #{pwd}
 	WHERE ID = #{id}
 	</update>
+	
+	<select id="login" resultType="co.box.giga.member.service.MemberVO">
+	SELECT ID, PWD FROM MEMBER 
+	WHERE ID=#{id}
+   </select>
 	
 	
 </mapper>
