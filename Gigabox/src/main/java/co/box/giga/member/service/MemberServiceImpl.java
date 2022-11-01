@@ -6,7 +6,9 @@ import co.box.giga.member.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	@Autowired MemberMapper dao;
+	@Autowired 
+	MemberMapper dao;
+	
 	
 	@Override
 	public int join(MemberVO vo) {
