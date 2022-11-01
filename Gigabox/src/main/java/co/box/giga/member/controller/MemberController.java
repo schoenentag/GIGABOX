@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import co.box.giga.member.service.KakaoAPI;
 import co.box.giga.member.service.MemberService;
 import co.box.giga.member.service.MemberVO;
 
