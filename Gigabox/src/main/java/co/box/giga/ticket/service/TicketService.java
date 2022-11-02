@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface TicketService {
 	// 예매 영화 전체 조회
-	List<TicketVO> tickerFindAll();
+	List<TicketVO> ticketFindAll();
 	
 	// 예매 영화 단건 조회
-	TicketVO tickerFindOne();
+	TicketVO ticketFindOne();
 	
 	// 예매 등록
 	int ticketInsert(TicketVO vo);
