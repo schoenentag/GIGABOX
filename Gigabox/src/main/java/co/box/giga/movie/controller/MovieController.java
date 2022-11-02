@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import co.box.giga.movie.service.MovieAPI;
 import co.box.giga.movie.service.MovieService;
 
 
@@ -12,9 +13,14 @@ import co.box.giga.movie.service.MovieService;
 public class MovieController {
 	@Autowired
 	private MovieService serv;
+	
+	
 	@GetMapping("/movieMain.do")
 	public String movieMain(Model model) {
-		model.addAttribute("list", serv.movieList());
+		
+		//MovieAPI api = new MovieAPI();
+		//api.requestAPI();
+		
 		return "movie/movieMain";
 	}
 

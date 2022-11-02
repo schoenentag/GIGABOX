@@ -95,14 +95,19 @@
 		    <artifactId>osdt_cert</artifactId>
 		    <version>21.7.0.0</version>
 		</dependency>
+		<!-- 서버를 재시작 하지 않아도 수정파일 반영 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		
-		
-		
+		<dependency>
+		  <groupId>org.json</groupId>
+		  <artifactId>json</artifactId>
+		  <version>20200518</version>
+		</dependency>
+				
 	</dependencies>
 
 	<build>
