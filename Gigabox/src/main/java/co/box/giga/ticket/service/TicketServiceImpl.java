@@ -13,13 +13,13 @@ public class TicketServiceImpl implements TicketService {
 	private TicketMapper map;
 	
 	@Override
-	public List<TicketVO> tickerFindAll() {
-		return map.tickerFindAll();
+	public List<TicketVO> ticketFindAll() {
+		return map.ticketFindAll();
 	}
 
 	@Override
-	public TicketVO tickerFindOne() {
-		return map.tickerFindOne();
+	public TicketVO ticketFindOne() {
+		return map.ticketFindOne();
 	}
 
 	@Override
@@ -36,5 +36,7 @@ public class TicketServiceImpl implements TicketService {
 	public int ticketDelete(TicketVO vo) {
 		return map.ticketDelete(vo);
 	}
+
+	
 
 }
