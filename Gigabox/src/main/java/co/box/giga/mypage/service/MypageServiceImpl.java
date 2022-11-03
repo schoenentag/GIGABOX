@@ -1,6 +1,5 @@
 package co.box.giga.mypage.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +17,6 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<MemberVO> pointList(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return dao.pointList(vo);
-	}
-
-	@Override
 	public int modify(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return dao.modify(vo);
@@ -33,5 +26,11 @@ public class MypageServiceImpl implements MypageService {
 	public MemberVO myTier(MemberVO vo) {
 		// TODO Auto-generated method stub
 		return dao.myTier(vo);
+	}
+
+	@Override
+	public int updatePoint(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
