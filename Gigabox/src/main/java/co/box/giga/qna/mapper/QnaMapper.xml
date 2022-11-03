@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.box.giga.qna.mapper.QnaMapper">
+	
+	
+	
+	<insert id="insertQna" parameterType="co.box.giga.qna.service.QnaVO">
+	<!-- <selectKey keyProperty="consultNo" order="BEFORE" resultType="int">
+			SELECT CASE WHEN MAX(QNA_NO) IS NULL THEN 1 ELSE MAX(QNA_NO)+1 END FROM QNA
+		</selectKey> -->
+	INSERT INTO QNA VALUES	(
+	<!-- QNA_SEQ.NEXTVAL, -->#{id},#{catCd},#{ttl},#{cntn},#{picAttach},#{pic},sysdate,<!-- QNA_SEQ.CURRVAL -->,0,0
+	)
+	</insert>
+	
+	<delete id="deleteQna">
+		DELETE FROM QNA WHERE QNA_NO=#{qnaNo}
+	</delete>
+	
+	<select id="selectQna"  parameterType="co.box.giga.qna.service.QnaVO" resultType="co.box.giga.qna.service.QnaVO">
+	SELECT * FROM QNA WHERE QNA_NO=#{qnaNo}
+	</select>
+	
+	<select id="searchQna" resultType="co.box.giga.qna.service.QnaVO">
+	SELECT * FROM QNA
+	<choose>
+			<when test="key == 1"> and ttl like '%'|| #{val} ||'%'</when>
+			<when test="key == 2"> and cntn like '%'|| #{val} ||'%'</when>
+	</choose>
+	</select>
+	
+	<select id="qnaList" resultType="co.box.giga.qna.service.QnaVO">
+	SELECT * FROM QNA
+	ORDER BY ORI_NO DESC, ORI_ORD ASC
+	</select>
+	
+</mapper>

@@ -10,7 +10,7 @@ public class MemberVO {
 	String nm;
 	Date birth;
 	String phone;
-	String picAttech;
+	String picAttach;
 	String pic;
 	String email;
 	String auth;

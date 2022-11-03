@@ -14,7 +14,7 @@ public class MyPageController {
 	
 	@GetMapping("/pointList.do")
 	public String pointList(Model model) {
-		model.addAttribute("pointList", pServ.pointList(null));
+		model.addAttribute("pointList", pServ.myPoint(null));
 		return "myPage/myPage";
 	}
 }

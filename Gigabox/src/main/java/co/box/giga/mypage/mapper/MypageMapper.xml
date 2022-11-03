@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.box.giga.mypage.mapper.MypageMapper">
 
+	<select id="myPoint" parameterType="co.box.giga.member.service.MemberVO" resultType="co.box.giga.member.service.MemberVO">
+	SELECT POINT FROM MEMBER WHERE ID=#{id}
+	</select>
+	
+	<update id="updatePoint" parameterType="co.box.giga.member.service.MemberVO">
+	UPDATE MEMBER
+	SET POINT=(SELECT POINT FROM MEMBER WHERE ID=#{id})-#{point}
+	WHERE ID=#{id}
+	</update>
+	
+	<update id="modify"
+		parameterType="co.box.giga.member.service.MemberVO">
+		UPDATE MEMBER
+		<set>
+			<if test="phone != null">phone = #{phone},</if>
+			<if test="pic != null">pic = #{pic},</if>
+			<if test="picAttach != null">pic_attach = #{picAttach},</if>
+			<if test="email != null">email = #{email},</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<select id="myTier" parameterType="co.box.giga.member.service.MemberVO" resultType="co.box.giga.member.service.MemberVO">
+	SELECT TIER_CD FROM MEMBER WHERE ID=#{id}
+	</select>
+	
 </mapper>
