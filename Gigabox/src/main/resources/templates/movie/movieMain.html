@@ -9,11 +9,11 @@
 }
 .btnInline{
     display:inline;
-    padding-right:2.5em; 
 }
 .MT{
-    color:white;
+    display:inline;
 }
+
 </style>
 </head>
 <body>
@@ -47,90 +47,93 @@
                         </div>
                         <div class="row movieBody">
                             <!-- 카드형 본문 -->
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/temp/chunsik1.jpg">
-                                        <div class="ep">관람등급</div>
-                                    </div>
-                                    <span class="MT"> <h5>엉화제목</h5> </span>
-	                                 <div class ="btnInline">
-	                                    <button type="button" class="btn btn-outline-light like">
-	                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
-										  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
-										</svg>&nbsp;like</button>
-	                                    <button type="button" class="btn btn-outline-light">예매하기</button>
-	                                </div>
-                                    
-                                </div>
-                            </div>
+                         
                             <!-- 카드형 본문 끝-->
                          
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/temp/chunsik2.jpg">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                                    </div>
-                                </div>
-                            </div>
+                         
                         
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="">
-                                        <div class="ep">18 / 18</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5><a href="#">Shiratorizawa Gakuen Koukou</a></h5>
-                                    </div>
-                                </div>
-                            </div>
                             
-                    <div class="product__pagination">
+                    <!--<div class="product__pagination">
                         <a href="#" class="current-page">1</a>
                         <a href="#">2</a>
                         <a href="#">3</a>
                         <a href="#">4</a>
                         <a href="#">5</a>
                         <a href="#"><i class="fa fa-angle-double-right"></i></a>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
     </section>
 <!-- Product Section End -->
-<!--<script>
+<script>
     //웹 로딩 후 바로 실행
     $(document).ready(function(){
+    //$("movieBody").empty(); 
         movieListCall();
     })
     
     // 영화진흥위원회 API 호출
     function movieListCall(){
-        console.log("movieListCall 실행은 됨");
-        var key = "?key=74ce9f68d191d2c403cadefac177e152"; //key 앞에 <?key=>를 붙여야함 : prameter
-        var targetDt = "20221030";
-        var itemPerPage = "&itemPerPage=20"; // 결과 row의 개수
+        //console.log("movieListCall 실행은 됨");
+        var key = "?key=74ce9f68d191d2c403cadefac177e152"; //key값(필수)
+        var targetDt = "&targetDt=20221030"; // 리스트 출력 날짜(필수)
+        let movieBody = document.getElementsByClassName("movieBody"); // 영화 본문 영역
+        let temp_html ="";
+        
 	    $.ajax({
 	        type:"GET",
-	        url:"http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json",
+	        url:"http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"+key+targetDt+"&itemPerPage=9",
+	        data:{},
 	        dataType:"json",
-	        success: function(res){
-	            alert ("호출성공");
-	            console.log(res)
+	        success: function(response){
+	            //console.log(response);
+	            
+	            for(let i in response){ // res == boxOfficeResult
+	                let jsonList = response[i].dailyBoxOfficeList; //boxOfficeResult의 오브젝트를 담음
+	                
+	                for(let list of jsonList){ 
+	                    let title = list.movieNm; //영화 제목
+	                    let rank = list.rank;
+	                    let openDt = list.openDt;
+	                    let movieCd = list.movieCd;
+	                    let img = "img/temp/chunsik1.jpg";
+	                    console.log(movieCd);
+	                   
+	                    temp_html += `<div class="col-lg-4 col-md-6 col-sm-6">
+		                                <div class="product__item">
+		                                     <div class="product__item__pic set-bg" data-setbg="${img}" 
+		                                    style="background-image: url(${img})";>
+		                                    
+		                                    <div class="ep">${rank}</div>
+		                                    </div>
+		                                    <div class="product__item__text mb-4 MT">
+		                                    <br>
+		                                        <h5><a href="/movieListOne.do${key}&movieCd=${movieCd}">${title}</a></h5>
+		                                        <p>개봉일 : ${openDt}</p>
+		                                    </div>
+			                                 <div class ="btnInline">
+			                                    <button type="button" class="btn btn-outline-light mr-2 like">
+			                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
+												  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
+												</svg>&nbsp;like</button>
+			                                    <button type="button" class="btn btn-outline-light">예매하기</button>
+			                                </div>
+		                                </div>
+                                      </div>`;
+	                }
+	            }
+	            //페이징 처리
+	           temp_html +=  `<div class="product__pagination">
+			                        <a href="#" class="current-page">1</a>
+			                        <a href="#">2</a>
+			                        <a href="#">3</a>
+			                        <a href="#">4</a>
+			                        <a href="#">5</a>
+			                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+		                  	  </div>`;
+	           
+	           $(movieBody).append(temp_html);
 	            
 	        },
 	        error: function (error) {
@@ -144,7 +147,14 @@
     $(".movieBody").on("click",".like", function(){
         console.log("일단실행됨")
     })
-</script>-->
+    //상세페이지로 이동
+    //$("#movieBody").on("click",$("[name='call']"),function(){}) 이미지 클릭이 안됨 ㅠ
+    $("#movieBody").on("click","h5",function(){
+        console.log("일단실행됨")
+    }) 
+  
+    
+</script>
 </div>
 </body>
 </html>
