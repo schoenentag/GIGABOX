@@ -17,4 +17,10 @@ public class MyPageController {
 		model.addAttribute("pointList", pServ.myPoint(null));
 		return "myPage/myPage";
 	}
+	
+	@GetMapping("/resDetails")
+	public String resDetails() {
+		return "myPage/resDetails";
+		
+	}
 }
