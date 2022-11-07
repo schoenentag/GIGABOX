@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
  <div layout:fragment="content">
@@ -14,8 +15,8 @@
                 <div class="row">
                 <input type="hidden" id="key" th:value="${key}">
                 <input type="hidden" id="movieCd" th:value="${movieCd}">
-                    <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="">
+                 <div class="col-lg-3">
+                        <div class="anime__details__pic set-bg" data-setbg="img/temp/chunsik1.jpg">
                             <div class="comment"><i class="fa fa-comments"></i> 11</div>
                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
                         </div>
@@ -23,8 +24,7 @@
                     <div class="col-lg-9">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
-                                <h3>Fate Stay Night: Unlimited Blade</h3>
-                                <span>フェイト／ステイナイト, Feito／sutei naito</span>
+                                <h3>제목</h3>
                             </div>
                             <div class="anime__details__rating">
                                 <div class="rating">
@@ -34,12 +34,9 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star-half-o"></i></a>
                                 </div>
-                                <span>1.029 Votes</span>
+                                <span>평점</span>
                             </div>
-                            <p>Every human inhabiting the world of Alcia is branded by a “Count” or a number written on
-                                their body. For Hina’s mother, her total drops to 0 and she’s pulled into the Abyss,
-                                never to be seen again. But her mother’s last words send Hina on a quest to find a
-                            legendary hero from the Waste War - the fabled Ace!</p>
+                            <p>스토리</p>
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
@@ -71,84 +68,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- 통계 -->
+                
+                <div class="chart-view mb-5">
+                    <canvas id="test1" style="background-color:white;"></canvas>
+                </div>
+                <!-- 통계 끝-->
+                <!-- 관람평 쓰기 -->
+ 				<div class="row">
                     <div class="col-lg-8 col-md-8">
-                        <div class="anime__details__review">
-                            <div class="section-title">
-                                <h5>Reviews</h5>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-1.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-2.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-3.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-4.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                    <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                    "demons" LOL</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-5.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                    <p>Finally it came out ages ago</p>
-                                </div>
-                            </div>
-                            <div class="anime__review__item">
-                                <div class="anime__review__item__pic">
-                                    <img src="img/anime/review-6.jpg" alt="">
-                                </div>
-                                <div class="anime__review__item__text">
-                                    <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                    <p>Where is the episode 15 ? Slow update! Tch</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="anime__details__form">
                             <div class="section-title">
-                                <h5>Your Comment</h5>
+                                <h5>관람평</h5>
                             </div>
                             <form action="#">
                                 <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+                                <button type="submit"><i class="fa fa-location-arrow"></i>관람평쓰기</button>
                             </form>
                         </div>
                     </div>
-                   
                 </div>
+                <!--관람평 쓰기 끝 -->
             </div>
         </section>
         <!-- Anime Section End -->
+ <!-- chart.js cdn -->
+   
 <script>
     //웹 로딩 후 바로 실행
     $(document).ready(function(){
@@ -186,6 +131,25 @@
 	    })
     
     }
+    
+    //관람포인트 
+	var ctx = document.getElementById('test1').getContext('2d');
+            var chart = new Chart(ctx, { //차트 선언
+                type: 'radar', // 차트타입
+                data: {
+                    labels: ['연출','배우','OST','영상미','스토리'], // 라벨 배열
+                    datasets: [{
+                        label: '관람 포인트',
+                        data: [10,50,70,80,30],
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+					    borderColor: 'rgb(255, 99, 132)',
+					    pointBackgroundColor: 'rgb(255, 99, 132)',
+					    pointBorderColor: '#fff',
+					    pointHoverBackgroundColor: '#fff',
+					    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    }]
+                }
+            });
 </script> 
  </div>
 
