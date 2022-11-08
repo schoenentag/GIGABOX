@@ -14,9 +14,9 @@ public interface MovieService {
 	List<MovieInfoVO> movieList(); // 모든 영화목록
 	MovieInfoVO movieListOne(MovieInfoVO vo); // 단건조회
 	
-	int movieInsert(MovieInfoVO vo); //영화 등록
-	int movieUpdate(MovieInfoVO vo); //영화 수정
- 	int movieDelete(MovieInfoVO vo); //영화 삭제
+	int movieInfoInsert(MovieInfoVO vo); //영화 등록
+	int movieInfoUpdate(MovieInfoVO vo); //영화 수정
+ 	int movieInfoDelete(MovieInfoVO vo); //영화 삭제
 	
 
 }
