@@ -4,7 +4,7 @@
     
     <!-- List<MovieInfoVO> movieList(); // 모든 영화목록 -->
     <select id="movieList" resultType="co.box.giga.movie.service.MovieInfoVO" >
-        <!-- SELECT MOVIE_NO,
+        SELECT MOVIE_NO,
 				TITLE,
 				DIRECTOR,
 				ACTOR,
@@ -19,9 +19,8 @@
 				PIC_ATTACH,
 				MTAB_CD,
 				FUN_CODENAME('T',MTAB_CD) MTAB_CD_NAME,
-				WISH,
-		FROM MOVIE_INFO -->
-		select * from movie_info
+				WISH
+		FROM MOVIE_INFO 
     </select>
 
 </mapper>

@@ -5,6 +5,40 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<style>
+ 
+	#viewpointUl li{
+	    display : inline;
+	    padding-right : 10px;
+	    padding-bottom: 10px;
+	    list-style:none;
+    }
+  .star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+  }
+  
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
+</style>
 </head>
 <body>
  <div layout:fragment="content">
@@ -74,31 +108,90 @@
                     <canvas id="test1" style="background-color:white;"></canvas>
                 </div>
                 <!-- 통계 끝-->
+
                 <!-- 관람평 쓰기 -->
  				<div class="row">
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-lg-8 col-md-8 mt-5">
                         <div class="anime__details__form">
                             <div class="section-title">
                                 <h5>관람평</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
-                                <button type="submit"><i class="fa fa-location-arrow"></i>관람평쓰기</button>
-                            </form>
+                             
+	                            <div>
+                                <button type="button" class="btn btn-outline-light" id="replyMd"><i class="fa fa-location-arrow"></i> Review</button>
+                                </div>
                         </div>
                     </div>
-                </div>
+                </div><br>
                 <!--관람평 쓰기 끝 -->
+                 <!-- 모달창 시작 -->
+<div id="rpyModal" class="modal">
+    <div class="col-md-12 col-15" id="testDiv">
+           <div class="modal-header">
+               <h4 class="card-title">관람평을 작성해주세요.</h4>
+             <div class="modal-close" style="cursor: pointer">X</div>
+          </div>
+           <div class="modal-content">
+               <div class="card-body">
+                   <!-- submit이 실행되기 전 유효성체크하는 함수 실행 -->
+                   <form class="form form-vertical" action="/replyInsert.do" onsubmit="return formCheck()" method="post"> 
+                       <div class="form-body">
+                            <div class="row">
+	                               <!-- 별점 -->
+	                               <div class="col-12">
+                                        <div class="form-group text-center">
+	                                        <h4> 영화는 어떠셨나요?</h2>
+	                                        
+	                                        <span class="star"> ★★★★★
+											  <span>★★★★★</span>
+											  <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+											</span>
+										 </div>
+                                  </div>
+	                              <div class="col-12" >
+	                                 <div class="form-group mb-3">
+							             <textarea class="form-control" id="content" name="content" rows="3" placeholder="5자 이상으로 작성해 주세요."></textarea>
+							         </div>
+	                              </div>
+                                <!-- 별점 끝-->
+                                <!-- 감상 포인트 -->
+                                <div class="mt-3 text-center"> 
+								    <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;관람포인트는 무엇인가요? <h2>
+									<h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(최대 2개까지 선택가능)</h5>
+                                    <ul id="viewpointUl" class="mt-3 mb-3 text-center">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<li><input type="checkbox" name="vp_code" style="cursor: pointer"> 연출</li>
+										<li><input type="checkbox" name="vp_code" style="cursor: pointer"> 스토리</li>
+										<li><input type="checkbox" name="vp_code" style="cursor: pointer"> 영상미</li>
+										<li><input type="checkbox" name="vp_code" style="cursor: pointer"> 배우</li>
+										<li><input type="checkbox" name="vp_code" style="cursor: pointer"> OST</li>
+									</ul>
+                                </div>
+	                              <!-- 관람포인트 끝 --> 
+                                <div class="col-12 d-flex justify-content-end">
+	                                <button type="submit" class="btn btn-primary mr-1 mb-1">등록</button>
+	                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- modal-content끝 -->
+     </div>
+</div>
+<!-- rpyModal 모달 끝 -->                
             </div>
         </section>
         <!-- Anime Section End -->
  <!-- chart.js cdn -->
+
    
 <script>
     //웹 로딩 후 바로 실행
     $(document).ready(function(){
         movieListOneCall();
     })
+    
     // 영화진흥위원회 API 호출(상세정보)
     function movieListOneCall(){
         // 이전 페이지에서 key와 movieCd를 받아옴
@@ -129,27 +222,72 @@
 	            alert("서버호출 실패");
 	        }
 	    })
-    
     }
+    
     
     //관람포인트 
 	var ctx = document.getElementById('test1').getContext('2d');
-            var chart = new Chart(ctx, { //차트 선언
-                type: 'radar', // 차트타입
-                data: {
-                    labels: ['연출','배우','OST','영상미','스토리'], // 라벨 배열
-                    datasets: [{
-                        label: '관람 포인트',
-                        data: [10,50,70,80,30],
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-					    borderColor: 'rgb(255, 99, 132)',
-					    pointBackgroundColor: 'rgb(255, 99, 132)',
-					    pointBorderColor: '#fff',
-					    pointHoverBackgroundColor: '#fff',
-					    pointHoverBorderColor: 'rgb(255, 99, 132)'
-                    }]
-                }
-            });
+    var chart = new Chart(ctx, { //차트 선언
+        type: 'radar', // 차트타입
+        data: {
+            labels: ['연출','배우','OST','영상미','스토리'], // 라벨 배열
+            datasets: [{
+                label: '관람 포인트',
+                data: [10,50,70,80,30],
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+			    borderColor: 'rgb(255, 99, 132)',
+			    pointBackgroundColor: 'rgb(255, 99, 132)',
+			    pointBorderColor: '#fff',
+			    pointHoverBackgroundColor: '#fff',
+			    pointHoverBorderColor: 'rgb(255, 99, 132)'
+            }]
+        }
+    });
+
+    
+	$(function(){ 
+	  //모달창 열기
+	   $("#replyMd").click(function(){
+	       $(".modal").fadeIn();
+	   });
+	  //모달창 닫기
+	  $(".modal-close").click(function(){
+	      $(".modal").fadeOut();
+	  });
+	});
+	//체크박스 제한
+	$("input[type='checkbox']").on("click",function(){
+	    let count = $("input:checked[type='checkbox']").length;
+	
+	    if(count > 2){
+	        $(this).prop("checked", false); //(false = 체크해제)
+	        alert("관람포인트는 최대 2개까지 선택할 수 있습니다");
+	    }
+	})
+	// input range 값을 드래그로 조종하여 별 width를 늘려주는 방식
+	const drawStar = (target) => {
+	    document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
+	}
+	
+	//유효성 체크
+	function formCheck(){
+	    let consult = $("#content").val();
+		  let con = $("#content");
+	    let countCK = $("input:checked[type='checkbox']").length;
+		    	
+		  if (consult == "") {
+		      alert("관람평을 입력해주세요.");
+		    	con.focus();
+		    	return false;
+		  }
+	
+	    if (countCK == 0){
+	        alert("관람포인트를 선택해주세요.");
+	        return false;
+	    }
+		    	
+		  return true;
+	}
 </script> 
  </div>
 

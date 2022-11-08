@@ -20,6 +20,7 @@ public class MovieController {
 		
 		return "movie/movieMain";
 	}
+	
 	@GetMapping("/movieListOne.do")
 	public String movieListOne(Model model, @RequestParam("key") String key, @RequestParam("movieCd") int movieCd){
 		

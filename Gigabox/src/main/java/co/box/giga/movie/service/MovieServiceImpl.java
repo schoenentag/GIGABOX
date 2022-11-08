@@ -32,22 +32,21 @@ public class MovieServiceImpl implements MovieService {
 	public MovieInfoVO movieListOne(MovieInfoVO vo) {
 		return map.movieListOne(vo);
 	}
-	
-	//영화 등록
+
 	@Override
-	public int movieInsert(MovieInfoVO vo) {
-		return map.movieInsert(vo);
-	}
-	//영화 수정
-	@Override
-	public int movieUpdate(MovieInfoVO vo) {
-		return map.movieUpdate(vo);
+	public int movieInfoInsert(MovieInfoVO vo) {
+		return map.movieInfoInsert(vo);
 	}
 
-	//영화 삭제
 	@Override
-	public int movieDelete(MovieInfoVO vo) {
-		return map.movieDelete(vo);
+	public int movieInfoUpdate(MovieInfoVO vo) {
+		return map.movieInfoUpdate(vo);
 	}
+
+	@Override
+	public int movieInfoDelete(MovieInfoVO vo) {
+		return map.movieInfoDelete(vo);
+	}
+	
 
 }
