@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EventService {
 	// 이벤트 전체 조회
-	List<EventVO> eventFindAll();
+	List<EventVO> eventFindAll(EventVO evo);
 	
 	// 이벤트 상세 조회
 	EventVO eventFindOne();
