@@ -13,8 +13,8 @@ public class EventServiceImpl implements EventService {
 	private EventMapper map;
 	
 	@Override
-	public List<EventVO> eventFindAll() {
-		return map.eventFindAll();
+	public List<EventVO> eventFindAll(EventVO evo) {
+		return map.eventFindAll(evo);
 	}
 
 	@Override
@@ -36,5 +36,7 @@ public class EventServiceImpl implements EventService {
 	public int eventDelete(EventVO vo) {
 		return map.eventDelete(vo);
 	}
+
+	
 
 }

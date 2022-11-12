@@ -10,16 +10,15 @@ import org.jsoup.select.Elements;
 
 public class TicketCrawling {
 	public static void main(String[] args) {
-		final String bookingUrl = "https://www.megabox.co.kr/booking";
-        Connection conn = Jsoup.connect(bookingUrl);
-        
-        try {
+		
+		try {
+			final String bookingUrl = "https://www.megabox.co.kr/booking";
+			Connection conn = Jsoup.connect(bookingUrl);
 			Document document = conn.get();
-			Elements dateElements = document.getElementsByClass("time-schedule");
 			
-			for(Element element : dateElements) {
-				System.out.println(element);
-			}
+			Elements timeElementsUrl = document.getElementsByClass("time-schedule");
+			
+			System.out.println();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -6,5 +6,6 @@
 		resultType="co.box.giga.event.service.EventVO">
 		SELECT *
 		FROM event
+		ORDER BY 1
 	</select>
 </mapper>
