@@ -22,5 +22,11 @@
 				WISH
 		FROM MOVIE_INFO 
     </select>
+    
+   <!--  int movieInfoInsert(MovieInfoVO vo); //영화 등록  -->
+   <insert id="movieInfoInsert">
+       INSERT INTO MOVIE_INFO (movie_no) values(#{movieNo})
+       
+   </insert>
 
 </mapper>
