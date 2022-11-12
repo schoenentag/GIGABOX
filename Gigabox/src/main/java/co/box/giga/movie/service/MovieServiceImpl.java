@@ -35,6 +35,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public int movieInfoInsert(MovieInfoVO vo) {
+		System.out.println("===== serviceImpl 들었다감!");
 		return map.movieInfoInsert(vo);
 	}
 
